@@ -6,22 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>First Article | Hexo</title>
+  <title>#Spring Cors以及Filter和Interceptor | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="康奈尔笔记  记录 - 论据，概念，内容  简化 - 概括 在 副栏  背诵 - 记忆 关键词  思考 - 提纲，摘要，归类，感想 - 单独记录  复习 - 总结回顾">
+  <meta name="description" content="Cors 在spring中配置方法1. @CrossOrigin 注解12345678@RestControllerclass HelloController &amp;#123;    @GetMapping(&quot;hello&quot;)    @CrossOrigin(origins &#x3D; [&quot;http:&#x2F;&#x2F;localhost:8080&quot;]) #针对方法handler">
 <meta property="og:type" content="article">
-<meta property="og:title" content="First Article">
-<meta property="og:url" content="http://example.com/2021/08/31/First-Article/index.html">
+<meta property="og:title" content="#Spring Cors以及Filter和Interceptor">
+<meta property="og:url" content="http://example.com/2021/09/01/Spring-Cors%E4%BB%A5%E5%8F%8AFilter%E5%92%8CInterceptor/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="康奈尔笔记  记录 - 论据，概念，内容  简化 - 概括 在 副栏  背诵 - 记忆 关键词  思考 - 提纲，摘要，归类，感想 - 单独记录  复习 - 总结回顾">
+<meta property="og:description" content="Cors 在spring中配置方法1. @CrossOrigin 注解12345678@RestControllerclass HelloController &amp;#123;    @GetMapping(&quot;hello&quot;)    @CrossOrigin(origins &#x3D; [&quot;http:&#x2F;&#x2F;localhost:8080&quot;]) #针对方法handler">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/image/note.jpeg">
-<meta property="article:published_time" content="2021-08-31T01:46:37.000Z">
-<meta property="article:modified_time" content="2021-09-02T03:36:22.663Z">
+<meta property="article:published_time" content="2021-09-01T03:35:41.000Z">
+<meta property="article:modified_time" content="2021-09-02T03:37:02.019Z">
 <meta property="article:author" content="Marvin Zhang">
-<meta property="article:tag" content="学习方法">
+<meta property="article:tag" content="Spring">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/image/note.jpeg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -157,42 +155,61 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-First-Article" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Spring-Cors以及Filter和Interceptor" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      First Article
+      #Spring Cors以及Filter和Interceptor
     </h1>
   
 
         
-        <a href="/2021/08/31/First-Article/" class="archive-article-date">
-  	<time datetime="2021-08-31T01:46:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-31</time>
+        <a href="/2021/09/01/Spring-Cors%E4%BB%A5%E5%8F%8AFilter%E5%92%8CInterceptor/" class="archive-article-date">
+  	<time datetime="2021-09-01T03:35:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-01</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="康奈尔笔记"><a href="#康奈尔笔记" class="headerlink" title="康奈尔笔记"></a>康奈尔笔记</h1><hr>
+        <h1 id="Cors-在spring中配置方法"><a href="#Cors-在spring中配置方法" class="headerlink" title="Cors 在spring中配置方法"></a>Cors 在spring中配置方法</h1><h2 id="1-CrossOrigin-注解"><a href="#1-CrossOrigin-注解" class="headerlink" title="1. @CrossOrigin 注解"></a>1. @CrossOrigin 注解</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HelloController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@GetMapping(&quot;hello&quot;)</span></span><br><span class="line">    <span class="meta">@CrossOrigin(origins = [&quot;http://localhost:8080&quot;])</span> #针对方法<span class="function">handler</span></span><br><span class="line"><span class="function">    fun <span class="title">hello</span><span class="params">()</span>: String </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Hello, CORS!&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-实现-WebMvcConfigurer-addCorsMappings-方法"><a href="#2-实现-WebMvcConfigurer-addCorsMappings-方法" class="headerlink" title="2. 实现 WebMvcConfigurer.addCorsMappings 方法"></a>2. 实现 WebMvcConfigurer.addCorsMappings 方法</h2><p>增加全局配置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableWebMvc</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MvcConfig</span>: <span class="title">WebMvcConfigurer</span> </span>&#123;</span><br><span class="line">    <span class="function">override fun <span class="title">addCorsMappings</span><span class="params">(registry: CorsRegistry)</span> </span>&#123;</span><br><span class="line">        registry.addMapping(<span class="string">&quot;/hello&quot;</span>)</span><br><span class="line">                .allowedOrigins(<span class="string">&quot;http://localhost:8080&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此种方法使用了CorsRegistry 和 CorsRegistration</p>
+<h2 id="3-注入-CorsFilter"><a href="#3-注入-CorsFilter" class="headerlink" title="3. 注入 CorsFilter"></a>3. 注入 CorsFilter</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CORSConfiguration</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function">fun <span class="title">corsFilter</span><span class="params">()</span>: CorsFilter </span>&#123;</span><br><span class="line">        val configuration = CorsConfiguration()</span><br><span class="line">        configuration.allowedOrigins = listOf(<span class="string">&quot;http://localhost:8080&quot;</span>)</span><br><span class="line">        val source = UrlBasedCorsConfigurationSource()</span><br><span class="line">        source.registerCorsConfiguration(<span class="string">&quot;/hello&quot;</span>, configuration)</span><br><span class="line">        <span class="keyword">return</span> CorsFilter(source)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>也可以实现FilterRegistrationBean</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> FilterRegistrationBean&lt;RequestResponseLoggingFilter&gt; <span class="title">loggingFilter</span><span class="params">()</span></span>&#123;</span><br><span class="line">    FilterRegistrationBean&lt;RequestResponseLoggingFilter&gt; registrationBean </span><br><span class="line">      = <span class="keyword">new</span> FilterRegistrationBean&lt;&gt;();</span><br><span class="line">        </span><br><span class="line">    registrationBean.setFilter(<span class="keyword">new</span> RequestResponseLoggingFilter());</span><br><span class="line">    registrationBean.addUrlPatterns(<span class="string">&quot;/users/*&quot;</span>);</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span> registrationBean;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-Spring-Security-中的配置"><a href="#4-Spring-Security-中的配置" class="headerlink" title="4. Spring Security 中的配置"></a>4. Spring Security 中的配置</h2><p>引入 spring.security后，以上方式都会失效，需要增加配置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SecurityConfig</span> : <span class="title">WebSecurityConfigurerAdapter</span>() </span>&#123;</span><br><span class="line">    <span class="function">override fun <span class="title">configure</span><span class="params">(http: HttpSecurity?)</span> </span>&#123;</span><br><span class="line">        http?.cors()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>或者与corsConfigurationSource配合</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function">fun <span class="title">corsConfigurationSource</span><span class="params">()</span>: CorsConfigurationSource </span>&#123;</span><br><span class="line">    val configuration = CorsConfiguration()</span><br><span class="line">    configuration.allowedOrigins = listOf(<span class="string">&quot;http://localhost:8080&quot;</span>)</span><br><span class="line">    val source = UrlBasedCorsConfigurationSource()</span><br><span class="line">    source.registerCorsConfiguration(<span class="string">&quot;/hello&quot;</span>, configuration)</span><br><span class="line">    <span class="keyword">return</span> source</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h1><p><strong>handler -&gt;<br>interceptor -&gt;<br>Dispatch Servlet -&gt;<br>Filter -&gt;<br>Web Container -&gt;<br>Client</strong></p>
+<hr>
 <ul>
-<li><p>记录 - 论据，概念，内容</p>
+<li><p>实现 WebMvcConfigurer.addCorsMappings 方法来进行的 CORS 配置，最后会在 Spring 的 Interceptor 或 Handler 中生效</p>
 </li>
-<li><p>简化 - 概括 在 副栏</p>
+<li><p>注入 CorsFilter 的方式会让 CORS 验证在 Filter 中生效</p>
 </li>
-<li><p>背诵 - 记忆 关键词</p>
+<li><p>引入 Spring Security 后，需要调用 HttpSecurity.cors 方法以保证 CorsFilter 会在身份验证相关的 Filter 之前执行</p>
 </li>
-<li><p>思考 - 提纲，摘要，归类，感想 - 单独记录</p>
+<li><p>HttpSecurity.cors + WebMvcConfigurer.addCorsMappings 是一种相对低效的方式，会导致跨域请求分别在 Filter 和 Interceptor 层各经历一次 CORS 验证</p>
 </li>
-<li><p>复习 - 总结回顾</p>
+<li><p>HttpSecurity.cors + 注册 CorsFilter 与 HttpSecurity.cors + 注册 CorsConfigurationSource 在运行的时候是等效的</p>
+</li>
+<li><p>在 Spring 中，没有通过 CORS 验证的请求会得到状态码为 403 的响应</p>
 </li>
 </ul>
-<hr>
-<p><img src="/image/note.jpeg" alt="note image"></p>
-<hr>
+<p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000019485883">Reference详解</a></p>
 
       
 
@@ -227,7 +244,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习方法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
         		</li>
       		
 		</ul>
@@ -283,7 +300,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/08/31/First-Article/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/09/01/Spring-Cors%E4%BB%A5%E5%8F%8AFilter%E5%92%8CInterceptor/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -297,18 +314,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/09/01/Algorithm-%E4%BA%8C%E5%88%86%E6%80%BB%E7%BB%93/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2021/09/01/BlockChain-Tendermint%E5%85%B1%E8%AF%86/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          #Algorithm 二分总结
+          #BlockChain Tendermint共识
         
       </div>
     </a>
   
   
-    <a href="/2021/08/31/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hello World</div>
+    <a href="/2021/09/01/Algorithm-%E4%BA%8C%E5%88%86%E6%80%BB%E7%BB%93/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">#Algorithm 二分总结</div>
       <i class="icon-circle-right"></i>
     </a>
   

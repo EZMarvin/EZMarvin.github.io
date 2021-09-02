@@ -6,22 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>First Article | Hexo</title>
+  <title>#Algorithm 二分总结 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="康奈尔笔记  记录 - 论据，概念，内容  简化 - 概括 在 副栏  背诵 - 记忆 关键词  思考 - 提纲，摘要，归类，感想 - 单独记录  复习 - 总结回顾">
+  <meta name="description" content="二分法 左右边界，取中位数查看 防止溢出：mid &#x3D; l + (r - l) &#x2F;&#x2F; 2 12345678while L &lt; R:  # 在L &#x3D; R时停止    if mid &#x3D;&#x3D; target:        R &#x3D; mid    if mid &lt; target:        L &#x3D; mid + 1 # 左边界收缩    else:        R &#x3D; mid">
 <meta property="og:type" content="article">
-<meta property="og:title" content="First Article">
-<meta property="og:url" content="http://example.com/2021/08/31/First-Article/index.html">
+<meta property="og:title" content="#Algorithm 二分总结">
+<meta property="og:url" content="http://example.com/2021/09/01/Algorithm-%E4%BA%8C%E5%88%86%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="康奈尔笔记  记录 - 论据，概念，内容  简化 - 概括 在 副栏  背诵 - 记忆 关键词  思考 - 提纲，摘要，归类，感想 - 单独记录  复习 - 总结回顾">
+<meta property="og:description" content="二分法 左右边界，取中位数查看 防止溢出：mid &#x3D; l + (r - l) &#x2F;&#x2F; 2 12345678while L &lt; R:  # 在L &#x3D; R时停止    if mid &#x3D;&#x3D; target:        R &#x3D; mid    if mid &lt; target:        L &#x3D; mid + 1 # 左边界收缩    else:        R &#x3D; mid">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/image/note.jpeg">
-<meta property="article:published_time" content="2021-08-31T01:46:37.000Z">
-<meta property="article:modified_time" content="2021-09-02T03:36:22.663Z">
+<meta property="article:published_time" content="2021-09-01T02:18:16.000Z">
+<meta property="article:modified_time" content="2021-09-02T03:37:23.494Z">
 <meta property="article:author" content="Marvin Zhang">
-<meta property="article:tag" content="学习方法">
+<meta property="article:tag" content="Algorithm">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/image/note.jpeg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -157,42 +155,31 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-First-Article" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Algorithm-二分总结" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      First Article
+      #Algorithm 二分总结
     </h1>
   
 
         
-        <a href="/2021/08/31/First-Article/" class="archive-article-date">
-  	<time datetime="2021-08-31T01:46:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-31</time>
+        <a href="/2021/09/01/Algorithm-%E4%BA%8C%E5%88%86%E6%80%BB%E7%BB%93/" class="archive-article-date">
+  	<time datetime="2021-09-01T02:18:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-01</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="康奈尔笔记"><a href="#康奈尔笔记" class="headerlink" title="康奈尔笔记"></a>康奈尔笔记</h1><hr>
-<ul>
-<li><p>记录 - 论据，概念，内容</p>
-</li>
-<li><p>简化 - 概括 在 副栏</p>
-</li>
-<li><p>背诵 - 记忆 关键词</p>
-</li>
-<li><p>思考 - 提纲，摘要，归类，感想 - 单独记录</p>
-</li>
-<li><p>复习 - 总结回顾</p>
-</li>
-</ul>
-<hr>
-<p><img src="/image/note.jpeg" alt="note image"></p>
-<hr>
+        <h1 id="二分法"><a href="#二分法" class="headerlink" title="二分法"></a>二分法</h1><hr>
+<p>左右边界，取中位数查看</p>
+<p><strong>防止溢出</strong>：mid = l + (r - l) // 2</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">while L &lt; R:  # 在L = R时停止</span><br><span class="line">    if mid == target:</span><br><span class="line">        R = mid</span><br><span class="line">    if mid &lt; target:</span><br><span class="line">        L = mid + 1 # 左边界收缩</span><br><span class="line">    else:</span><br><span class="line">        R = mid</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 
       
 
@@ -227,7 +214,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习方法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Algorithm</a>
         		</li>
       		
 		</ul>
@@ -283,7 +270,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/08/31/First-Article/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/09/01/Algorithm-%E4%BA%8C%E5%88%86%E6%80%BB%E7%BB%93/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -297,18 +284,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/09/01/Algorithm-%E4%BA%8C%E5%88%86%E6%80%BB%E7%BB%93/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2021/09/01/Spring-Cors%E4%BB%A5%E5%8F%8AFilter%E5%92%8CInterceptor/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          #Algorithm 二分总结
+          #Spring Cors以及Filter和Interceptor
         
       </div>
     </a>
   
   
-    <a href="/2021/08/31/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hello World</div>
+    <a href="/2021/08/31/First-Article/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">First Article</div>
       <i class="icon-circle-right"></i>
     </a>
   
