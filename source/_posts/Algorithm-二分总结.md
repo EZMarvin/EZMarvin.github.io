@@ -2,6 +2,7 @@
 title: '#Algorithm 二分总结'
 date: 2021-09-01 10:18:16
 tags:
+    - Algorithm
 ---
 # 二分法
 ---
