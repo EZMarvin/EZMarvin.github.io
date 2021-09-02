@@ -14,7 +14,7 @@ tags:
 - 思考 - 提纲，摘要，归类，感想 - 单独记录
 - 复习 - 总结回顾
 ---
-![note image](/image/note.jpeg)
+![note image](../image/note.jpeg)
 ---
 
 
