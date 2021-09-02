@@ -11,7 +11,7 @@ tags:
 
 Core + ABCI， 是对共识层以下的一层封装
 
-![note image](../image/tendermint.png)
+![note image](https://pic3.zhimg.com/80/v2-ce91a17d2eaf8c6a472c404663006b7e_1440w.jpg)
 
 ---
 ## 1. 核心模块
@@ -34,7 +34,7 @@ Core + ABCI， 是对共识层以下的一层封装
 
 ## 1. 算法 - 阶段
 
-![note image](../image/tendermintFlow.png)
+![note image](https://pic1.zhimg.com/80/v2-ebcaa425624856f3b88109e24baf5a20_1440w.jpg)
 
 NewHeight
 - 进入到下一轮 共识
