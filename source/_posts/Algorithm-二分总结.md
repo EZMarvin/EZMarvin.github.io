@@ -5,13 +5,15 @@ tags:
     - Algorithm
 ---
 # 二分法
+
+basic
 ---
 左右边界，取中位数查看
 
 **防止溢出**：mid = l + (r - l) // 2
 
 ```
-while L < R:  # 在L = R时停止
+while L <= R:  # 在L > R时停止
     if mid == target:
         R = mid
     if mid < target:
@@ -20,4 +22,15 @@ while L < R:  # 在L = R时停止
         R = mid
 
 ```
+
+### Corner case
+- 一个数值
+- 没有数值
+
+
+1. 搜索数值
+
+2. 寻找转折点
+
+3. 最小K个数 - quick sort方法
 
