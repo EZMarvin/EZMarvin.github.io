@@ -152,6 +152,857 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-grok-Instagram" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/27/grok-Instagram/">grok-Instagram</a>
+    </h1>
+  
+
+        
+        <a href="/2021/10/27/grok-Instagram/" class="archive-article-date">
+  	<time datetime="2021-10-27T02:44:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/10/27/grok-Instagram/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-grok-PasteBin" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/26/grok-PasteBin/">grok-PasteBin</a>
+    </h1>
+  
+
+        
+        <a href="/2021/10/26/grok-PasteBin/" class="archive-article-date">
+  	<time datetime="2021-10-26T01:29:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="What-is-Paste-Bin-requirement"><a href="#What-is-Paste-Bin-requirement" class="headerlink" title="What is Paste Bin - requirement"></a>What is Paste Bin - requirement</h1><ul>
+<li>customer enter a text on webpage</li>
+<li>generate url for the text</li>
+<li>expire time</li>
+<li>title / cutome uRL</li>
+</ul>
+<h2 id="additional"><a href="#additional" class="headerlink" title="additional"></a>additional</h2><ul>
+<li>analytics </li>
+<li>user login</li>
+<li>public private setting</li>
+<li>password crypted</li>
+<li>grammer high light</li>
+</ul>
+<h1 id="What-is-the-throughput-capacity-amp-volumn-calcute"><a href="#What-is-the-throughput-capacity-amp-volumn-calcute" class="headerlink" title="What is the throughput - capacity &amp; volumn calcute"></a>What is the throughput - capacity &amp; volumn calcute</h1><ul>
+<li>text size limit - 10MB</li>
+<li>url size</li>
+<li>write volumn - 1M/DAY = 12/s</li>
+<li>access &amp; read volumn = 60/s</li>
+</ul>
+<p>band width</p>
+<ul>
+<li>WRITE = 12 * 10 = 120 KB / S</li>
+<li>READ = 600 KB /S</li>
+</ul>
+<p>Storage</p>
+<p>assume average 10K</p>
+<ul>
+<li>total : 10KB * 1M  = 10 GB/day = 36TB/10year</li>
+<li>key for each data: 1M * 365 * 10 = 36B &lt; 64^6</li>
+<li>key size: 6bytes * 36B = 22GB </li>
+</ul>
+<p>Cache 20% of read</p>
+<ul>
+<li>5M read * 0.2 * 10KB = 10GB</li>
+</ul>
+<h1 id="API-design-function-design"><a href="#API-design-function-design" class="headerlink" title="API design - function design"></a>API design - function design</h1><ol>
+<li>basic create url on text<ul>
+<li>input (api_dev_key,text) optional(title, custom url, id, expiredate)</li>
+<li>output [url]</li>
+</ul>
+</li>
+<li>get paste</li>
+<li>delete paste</li>
+</ol>
+<h1 id="DB-design"><a href="#DB-design" class="headerlink" title="DB design"></a>DB design</h1><p>key | text | title | expire date | user id | url</p>
+<p>seperate user</p>
+<p>key | title | create date | expire date</p>
+<p>userid | email | create date</p>
+<p>S3 store object data</p>
+<h1 id="Component-design"><a href="#Component-design" class="headerlink" title="Component design"></a>Component design</h1><p>application server</p>
+<ul>
+<li>get text</li>
+<li>generate key</li>
+<li>store</li>
+<li>return url</li>
+</ul>
+<p>possible error - duplicate key - regenerate</p>
+<p>key generate service - pre generate key &amp; keep track used key</p>
+<h1 id="DB-detail"><a href="#DB-detail" class="headerlink" title="DB detail"></a>DB detail</h1><ul>
+<li>partition &amp; replica</li>
+<li>purge DB clean up<ul>
+<li>handle expire </li>
+<li>expire program</li>
+</ul>
+</li>
+<li>Cache<ul>
+<li>20%</li>
+<li>chose what to cache - LRU</li>
+<li>update</li>
+</ul>
+</li>
+</ul>
+<h1 id="Security-and-Permissions"><a href="#Security-and-Permissions" class="headerlink" title="Security and Permissions"></a>Security and Permissions</h1>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/10/26/grok-PasteBin/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-grok-TinyUrl" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/26/grok-TinyUrl/">grok-TinyUrl</a>
+    </h1>
+  
+
+        
+        <a href="/2021/10/26/grok-TinyUrl/" class="archive-article-date">
+  	<time datetime="2021-10-26T01:24:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-10-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/10/26/grok-TinyUrl/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Algorithm-位运算总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/09/27/Algorithm-%E4%BD%8D%E8%BF%90%E7%AE%97%E6%80%BB%E7%BB%93/">Algorithm-位运算总结</a>
+    </h1>
+  
+
+        
+        <a href="/2021/09/27/Algorithm-%E4%BD%8D%E8%BF%90%E7%AE%97%E6%80%BB%E7%BB%93/" class="archive-article-date">
+  	<time datetime="2021-09-27T08:48:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h2><ol>
+<li>运算替换<ul>
+<li>不用加减 完成 加减法</li>
+<li>不用乘除 完成 乘除法<ul>
+<li>减法替代，a 不停 - b, 并计数</li>
+<li>优化 A / X &gt; b 则 A &gt; x * b, 利用此特性将X从最大可能值向最小值循环尝试</li>
+<li>a * x &gt; b =&gt; a = a - x * b, v = v+x</li>
+</ul>
+</li>
+<li></li>
+</ul>
+</li>
+<li>找唯一的数字<ul>
+<li>在重复的数字</li>
+<li>找出重复3</li>
+</ul>
+</li>
+<li>2进制统计<ul>
+<li>统计 1 的个数<ul>
+<li>n &amp; 1&lt;&lt; i 按照位数，逐位查看</li>
+<li>【 n &amp; (n-1) 】运算会将n的最后一位1变成0</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Algorithm</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/09/27/Algorithm-%E4%BD%8D%E8%BF%90%E7%AE%97%E6%80%BB%E7%BB%93/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-SystemDesign-grok" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/09/18/SystemDesign-grok/">SystemDesign-grok-</a>
+    </h1>
+  
+
+        
+        <a href="/2021/09/18/SystemDesign-grok/" class="archive-article-date">
+  	<time datetime="2021-09-18T03:03:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Grok-System-Design"><a href="#Grok-System-Design" class="headerlink" title="Grok System Design"></a>Grok System Design</h1><h2 id="step-by-step-guid"><a href="#step-by-step-guid" class="headerlink" title="step by step guid"></a>step by step guid</h2><ol>
+<li><p>需求明确</p>
+<ul>
+<li>即能问出关于系统的需求问题 - 功能方面</li>
+<li>例如 文件形式 图片/视频； 搜索功能； 前后端侧重；</li>
+</ul>
+</li>
+<li><p>接口设计</p>
+<ul>
+<li>接口方法设计，方法名，参数</li>
+</ul>
+</li>
+<li><p>规模预估</p>
+<ul>
+<li>考虑方面： <strong>扩展，分片，负载均衡，缓存</strong></li>
+<li>基础数据： 用户量，访问量，数据量</li>
+<li>推断数据： 存储，带宽</li>
+</ul>
+</li>
+<li><p>数据模型</p>
+<ul>
+<li>设计系统内部数据传输时 使用的模型</li>
+<li>影响 <strong>数据库选择，数据分割，数据管理</strong></li>
+<li>SQL / NoSQL</li>
+<li></li>
+</ul>
+</li>
+<li><p>高层次模块设计</p>
+<ul>
+<li>功能模块 要覆盖全面</li>
+</ul>
+</li>
+<li><p>详细设计</p>
+<ul>
+<li>对其中2-3个模块进行详细设计</li>
+<li>多种方法解决，并说出pros &amp; cons，以及当前场景适合的方法</li>
+<li>大数据量 -&gt; 是否分区 （性能，容量/花费，全表连表查询，事务性需要应用层实现，负载要求高）-&gt; 水平(分片)，垂直（字段分割），功能 </li>
+<li>特殊情况分析 - 特殊高访问数据 / 高使用度功能特殊优化(most recent post)</li>
+<li>缓存，负载均衡</li>
+</ul>
+</li>
+<li><p>瓶颈识别和解决</p>
+<ul>
+<li>single failure handling - 高可用，高可靠</li>
+<li>副本备份 - 可用，性能</li>
+<li>monitor监控，performance性能，alert警告</li>
+</ul>
+</li>
+</ol>
+<h3 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h3><pre><code>需求明确 -&gt; 规模预估（频率 + 数量） -&gt;（存储 + 带宽 + 负载 + 性能） 瓶颈解决 （可用，稳定，监控）
+
+接口 -&gt; 数据 -&gt; 模块 -&gt; 高频场景功能 设计
+</code></pre>
+<hr>
+<h1 id="分布式系统要素"><a href="#分布式系统要素" class="headerlink" title="分布式系统要素"></a>分布式系统要素</h1><ul>
+<li>Scalability 可扩展性<ul>
+<li>便于扩展 且不影响性能</li>
+<li>系统，功能，存储，网络 层面</li>
+<li>横向 - 加数量 Cassandra Mongo/ 纵向 - 加性能 Mysql</li>
+</ul>
+</li>
+<li>Reliability 可靠性<ul>
+<li>single point fail</li>
+<li>不回由于几台机器或服务的下线而影响整体功能</li>
+<li>安全性</li>
+<li>redundancy &amp; replica</li>
+</ul>
+</li>
+<li>Availability 可用<ul>
+<li>可长时间持续运行</li>
+<li>maintanence</li>
+<li>Reliability -&gt; 一定 availability， Available 不一定 reliable</li>
+</ul>
+</li>
+<li>Efficientcy 效率<ul>
+<li>response time / latency 延迟</li>
+<li>bandwidth / throughput 吞吐 带宽</li>
+</ul>
+</li>
+<li>Manageability Serviceability<ul>
+<li>可简单 使用 管理 维护</li>
+</ul>
+</li>
+</ul>
+<h2 id="Load-Balancing"><a href="#Load-Balancing" class="headerlink" title="Load Balancing"></a>Load Balancing</h2><pre><code>prevent single point failer
+1. between user and web server
+2. between internal layer and web server
+3. between internal layer and data base
+
+好处
+1. 防止单点失败影响用户，less downtime， higher throughput
+2. 减少wait time，便于维护和管理
+3. 智能的LB可以分析瓶颈和处理预测信息
+4. 减少服务器负载，减少服务器损耗
+
+算法 - 分配方式
+
+health check first
+持续链接
+- least connection 转到连接数最少的服务器 
+- least response time 转到连接数最少且平均回复时间最短的
+- least bandwidth 转到现在已用带宽最少的
+短快的链接
+- round robin 按顺序均分
+- weighted round robin 权重
+- IP HASH 根据client IP随机分配
+</code></pre>
+<h2 id="Cache"><a href="#Cache" class="headerlink" title="Cache"></a>Cache</h2><ul>
+<li><p>Application server Cache</p>
+<ul>
+<li>解决硬盘</li>
+<li>分布式 - distributing cache / global cache</li>
+<li>分布式 cache 对于stateful request 会有问题</li>
+</ul>
+</li>
+<li><p>Content Distributing Network CDN</p>
+<ul>
+<li>解决跨区域server静态资源</li>
+<li>local资源中转暂存站</li>
+<li>可用subdomain的轻型HTTP服务器暂时替代</li>
+</ul>
+</li>
+<li><p>Cache invalid</p>
+<ul>
+<li>数据更新</li>
+<li>老数据过期</li>
+<li>write through - 更新数据写两次，cache和DB - high latency for write</li>
+<li>write around - 跳过cache，所以会有cache miss</li>
+<li>write back - 先写入cache，然后disk，有丢失风险。low latency high throughput</li>
+</ul>
+</li>
+<li><p>Cache eviction</p>
+<ul>
+<li><p>FIFO</p>
+</li>
+<li><p>LIFO 后进先出</p>
+</li>
+<li><p>LRU Least recent use </p>
+</li>
+<li><p>MRU Most recent user 时间最近</p>
+</li>
+<li><p>LFU Frequency 最不常用</p>
+</li>
+<li><p>MFU 最常用</p>
+</li>
+<li><p>RR random随机</p>
+<h3 id="cache相关问题"><a href="#cache相关问题" class="headerlink" title="cache相关问题"></a>cache相关问题</h3><h2 id="1-缓存穿透-某个不存在的数据-被大规模访问-导致不断db查询"><a href="#1-缓存穿透-某个不存在的数据-被大规模访问-导致不断db查询" class="headerlink" title="1. 缓存穿透 - 某个不存在的数据 被大规模访问 导致不断db查询"></a>1. 缓存穿透 - 某个<strong>不存在的数据</strong> 被大规模访问 导致不断db查询</h2><ul>
+<li>解决：布隆过滤器过滤空值要求 / 或者直接缓存空值<h2 id="2-缓存雪崩-某个时间-大规模的key集体失效-导致DB访问量大增"><a href="#2-缓存雪崩-某个时间-大规模的key集体失效-导致DB访问量大增" class="headerlink" title="2. 缓存雪崩 - 某个时间 大规模的key集体失效 导致DB访问量大增"></a>2. 缓存雪崩 - <strong>某个时间</strong> 大规模的key集体失效 导致DB访问量大增</h2></li>
+<li>解决：缓存设置时间时 外加随机值 / 或者物理永不过期，用过期时间放在value里功能逻辑检查更新</li>
+</ul>
+<p>事前：</p>
+<p>① 均匀过期：设置不同的过期时间，让缓存失效的时间尽量均匀，避免相同的过期时间导致缓存雪崩，造成大量数据库的访问。</p>
+<p>② 分级缓存：第一级缓存失效的基础上，访问二级缓存，每一级缓存的失效时间都不同。</p>
+<p>③ 热点数据缓存永远不过期。</p>
+<p>④ 保证Redis缓存的高可用，防止Redis宕机导致缓存雪崩的问题。可以使用 主从+ 哨兵，Redis集群来避免 Redis 全盘崩溃的情况。</p>
+<p>事中：</p>
+<p>① 互斥锁：在缓存失效后，通过互斥锁或者队列来控制读数据写缓存的线程数量，比如某个key只允许一个线程查询数据和写缓存，其他线程等待。这种方式会阻塞其他的线程，此时系统的吞吐量会下降</p>
+<p>② 使用熔断机制，限流降级。当流量达到一定的阈值，直接返回“系统拥挤”之类的提示，防止过多的请求打在数据库上将数据库击垮，至少能保证一部分用户是可以正常使用，其他用户多刷新几次也能得到结果。</p>
+<p>事后：</p>
+<p>① 开启Redis持久化机制，尽快恢复缓存数据，一旦重启，就能从磁盘上自动加载数据恢复内存中的数据。</p>
+</li>
+</ul>
+<h2 id="3-缓存击穿-某个高访问量的key失效-导致DB访问量大增"><a href="#3-缓存击穿-某个高访问量的key失效-导致DB访问量大增" class="headerlink" title="3. 缓存击穿 - 某个高访问量的key失效 导致DB访问量大增"></a>3. 缓存击穿 - 某个<strong>高访问量的key失效</strong> 导致DB访问量大增</h2><ul>
+<li>解决：<ul>
+<li>永不过期<ul>
+<li>物理上不过期</li>
+<li>逻辑上更新</li>
+</ul>
+</li>
+<li>mutex锁 - 锁住load DB 操作，缓存先去fetch data<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">get</span><span class="params">(key)</span> </span>&#123;</span><br><span class="line">  String value = redis.get(key);</span><br><span class="line">  <span class="keyword">if</span> (value == <span class="keyword">null</span>) &#123; <span class="comment">//代表缓存值过期</span></span><br><span class="line">      <span class="comment">//设置3min的超时，防止del操作失败的时候，下次缓存过期一直不能load db</span></span><br><span class="line"><span class="keyword">if</span> (redis.setnx(key_mutex, <span class="number">1</span>, <span class="number">3</span> * <span class="number">60</span>) == <span class="number">1</span>) &#123;  <span class="comment">//代表设置成功</span></span><br><span class="line">           value = db.get(key);</span><br><span class="line">                  redis.set(key, value, expire_secs);</span><br><span class="line">                  redis.del(key_mutex);</span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;  <span class="comment">//这个时候代表同时候的其他线程已经load db并回设到缓存了，这时候重试获取缓存值即可</span></span><br><span class="line">                  sleep(<span class="number">50</span>);</span><br><span class="line">                  get(key);  <span class="comment">//重试</span></span><br><span class="line">          &#125;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="keyword">return</span> value;      </span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>解决方案</th>
+<th align="center">优点</th>
+<th align="right">缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>简单分布式互斥锁（mutex key）</td>
+<td align="center">1. 思路简单 2. 保证一致性</td>
+<td align="right">1. 代码复杂度增大 2. 存在死锁的风险 3. 存在线程池阻塞的风险</td>
+</tr>
+<tr>
+<td>“提前”使用互斥锁</td>
+<td align="center">遇到有value timeout，先延长，同时去load和更新新的value</td>
+<td align="right"></td>
+</tr>
+<tr>
+<td>不过期(本文)</td>
+<td align="center">异步构建缓存，不会阻塞线程池</td>
+<td align="right">不保证一致性。2. 代码复杂度增大(每个value都要维护一个timekey)。3. 占用一定的内存空间(每个value都要维护一个timekey)。</td>
+</tr>
+<tr>
+<td>资源隔离组件hystrix(本文)</td>
+<td align="center">hystrix技术成熟，有效保证后端。2. hystrix监控强大。</td>
+<td align="right">部分访问降级</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-缓存预热"><a href="#4-缓存预热" class="headerlink" title="4.缓存预热"></a>4.缓存预热</h2><p>提前缓存数据，根据优先级</p>
+<h2 id="5-缓存降级"><a href="#5-缓存降级" class="headerlink" title="5.缓存降级"></a>5.缓存降级</h2><p>缓存降级是指缓存失效或缓存服务器挂掉的情况下，不去访问数据库，直接返回默认数据或访问服务的内存数据。降级一般是有损的操作，所以尽量减少降级对于业务的影响程度。</p>
+<blockquote>
+<p>在项目实战中通常会将部分热点数据缓存到服务的内存中，这样一旦缓存出现异常，可以直接使用服务的内存数据，从而避免数据库遭受巨大压力。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="hystrix"><a href="#hystrix" class="headerlink" title="hystrix"></a>hystrix</h3><p>根据依赖对线程进行管理</p>
+<p>不同依赖有各自的线程池</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">System Design</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/09/18/SystemDesign-grok/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-BlockChain-BitCoin" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/09/18/BlockChain-BitCoin/">BlockChain-BitCoin</a>
+    </h1>
+  
+
+        
+        <a href="/2021/09/18/BlockChain-BitCoin/" class="archive-article-date">
+  	<time datetime="2021-09-18T03:03:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/09/18/BlockChain-BitCoin/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-计算机网络-1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/09/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-1/">计算机网络-1</a>
+    </h1>
+  
+
+        
+        <a href="/2021/09/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-1/" class="archive-article-date">
+  	<time datetime="2021-09-02T03:57:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="分层"><a href="#分层" class="headerlink" title="分层"></a>分层</h1><ul>
+<li>物理</li>
+<li>数据链路</li>
+<li>网络</li>
+<li>传输 - （会话，表示）</li>
+<li>应用层</li>
+</ul>
+<hr>
+<table>
+<thead>
+<tr>
+<th>网络协议</th>
+<th align="center">层级</th>
+<th align="right">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>TCP</strong></td>
+<td align="center">传输层协议</td>
+<td align="right">面向连接，3次握手。面对二进制数据流传输</td>
+</tr>
+<tr>
+<td><strong>UDP</strong></td>
+<td align="center">传输层协议</td>
+<td align="right">非面向连接，不可靠，但是快速</td>
+</tr>
+<tr>
+<td><strong>Http</strong></td>
+<td align="center">应用层</td>
+<td align="right">无状态，面对数据包装，服务器响应request后就断掉</td>
+</tr>
+<tr>
+<td><strong>Socket</strong></td>
+<td align="center"></td>
+<td align="right">针对 TCP 的具体接口实现提供传输层编程使用方法</td>
+</tr>
+<tr>
+<td><strong>RPC</strong></td>
+<td align="center"></td>
+<td align="right">remote Procedure Call 远程过程调用，跨服务器调用方法</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="有HTTP为何要用rpc"><a href="#有HTTP为何要用rpc" class="headerlink" title="有HTTP为何要用rpc"></a>有HTTP为何要用rpc</h2><blockquote>
+<p>RPC跟HTTP不是对立面，RPC中可以使用HTTP作为通讯协议。RPC是一种设计、实现框架，通讯协议只是其中一部分。</p>
+</blockquote>
+<blockquote>
+<p>RPC的本质是提供了一种轻量无感知的跨进程通信的方式，远程调用的过程是透明的，你并不知道这个调用的方法是部署在哪里，通过PRC能够解耦服务）。RPC是根据语言的API来定义的，而不是基于网络的应用来定义的，调用更方便，协议私密更安全、内容更小效率更高</p>
+</blockquote>
+<h2 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h2><blockquote>
+<p>http接口是在接口不多、系统与系统交互较少的情况下，解决信息孤岛初期常使用的一种通信手段；优点就是简单、直接、开发方便。利用现成的http协议 进行传输。</p>
+</blockquote>
+<p>但是如果是一个大型的网站，内部子系统较多、接口非常多的情况下，RPC框架的好处就显示出来了</p>
+<ol>
+<li>首先（基于TCP协议的情况下）就是长链接，不必每次通信都要像http 一样去3次握手什么的，减少了网络开销；</li>
+<li>其次就是RPC框架一般都有注册中心，有丰富的监控管理；发布、下线接口、动态扩展等，对调用方来说是无感知、统 一化的操作。</li>
+<li>第三个来说就是安全性。最后就是最近流行的服务化架构、服务化治理，RPC框架是一个强力的支撑。</li>
+</ol>
+<h2 id="RPC-任务"><a href="#RPC-任务" class="headerlink" title="RPC 任务"></a>RPC 任务</h2><ul>
+<li>通信建立 - TCP</li>
+<li>寻址 - RPC需要服务器地址、端口，调用函数名称，建立方法到call id映射</li>
+<li>序列化和反序列化， 调用过程是二进制，但是应用需要正常数据</li>
+</ul>
+<h2 id="gRPC"><a href="#gRPC" class="headerlink" title="gRPC"></a>gRPC</h2><p>google RPC，基于 HTTP/2</p>
+<ul>
+<li>内容交换使用 protobuff 自动且快色的序列化 .proto 接口描述文件</li>
+<li>传输协议 http2 性能好</li>
+</ul>
+<h2 id="HTTP-2-0"><a href="#HTTP-2-0" class="headerlink" title="HTTP 2.0"></a>HTTP 2.0</h2><ul>
+<li>原来 基于文本， 现在基于 二进制</li>
+<li>现在 多request可共享连接</li>
+<li>现在 header压缩</li>
+<li>现在 服务器主动推送</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">网络系统</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/09/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-1/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-BlockChain-Tendermint共识" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -452,11 +1303,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="二分法"><a href="#二分法" class="headerlink" title="二分法"></a>二分法</h1><hr>
-<p>左右边界，取中位数查看</p>
+        <h1 id="二分法"><a href="#二分法" class="headerlink" title="二分法"></a>二分法</h1><h2 id="basic"><a href="#basic" class="headerlink" title="basic"></a>basic</h2><p>左右边界，取中位数查看</p>
 <p><strong>防止溢出</strong>：mid = l + (r - l) // 2</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">while L &lt; R:  # 在L = R时停止</span><br><span class="line">    if mid == target:</span><br><span class="line">        R = mid</span><br><span class="line">    if mid &lt; target:</span><br><span class="line">        L = mid + 1 # 左边界收缩</span><br><span class="line">    else:</span><br><span class="line">        R = mid</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">while L &lt;= R:  # 在L &gt; R时停止</span><br><span class="line">    if mid == target:</span><br><span class="line">        R = mid</span><br><span class="line">    if mid &lt; target:</span><br><span class="line">        L = mid + 1 # 左边界收缩</span><br><span class="line">    else:</span><br><span class="line">        R = mid</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
+<h3 id="Corner-case"><a href="#Corner-case" class="headerlink" title="Corner case"></a>Corner case</h3><ul>
+<li>一个数值</li>
+<li>没有数值</li>
+</ul>
+<ol>
+<li><p>搜索数值</p>
+</li>
+<li><p>寻找转折点</p>
+</li>
+<li><p>最小K个数 - quick sort方法</p>
+</li>
+</ol>
 
       
 
@@ -510,170 +1372,10 @@
 
 
   
-    <article id="post-First-Article" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/31/First-Article/">First Article</a>
-    </h1>
-  
-
-        
-        <a href="/2021/08/31/First-Article/" class="archive-article-date">
-  	<time datetime="2021-08-31T01:46:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-31</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="康奈尔笔记"><a href="#康奈尔笔记" class="headerlink" title="康奈尔笔记"></a>康奈尔笔记</h1><hr>
-<ul>
-<li><p>记录 - 论据，概念，内容</p>
-</li>
-<li><p>简化 - 概括 在 副栏</p>
-</li>
-<li><p>背诵 - 记忆 关键词</p>
-</li>
-<li><p>思考 - 提纲，摘要，归类，感想 - 单独记录</p>
-</li>
-<li><p>复习 - 总结回顾</p>
-</li>
-</ul>
-<hr>
-<p><img src="/image/note.jpeg" alt="note image"></p>
-<hr>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">学习方法</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/08/31/First-Article/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/08/31/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2021/08/31/hello-world/" class="archive-article-date">
-  	<time datetime="2021-08-31T01:39:21.819Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-08-31</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/08/31/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+    </nav>
   
 
 
@@ -780,6 +1482,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Spring</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">System Design</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">网络系统</a>
               </li>
             
             <div class="clearfix"></div>

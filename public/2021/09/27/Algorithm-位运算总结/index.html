@@ -6,23 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>#BlockChain Tendermint共识 | Hexo</title>
+  <title>Algorithm-位运算总结 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Tendermint一种拜占庭共识算法 不同环境 安全 一致性 复用 Core + ABCI， 是对共识层以下的一层封装   1. 核心模块ABCI app socket 链接 实现ABCI 接口 checkTX DeliverTX Commit   能处理 ABCI message  Tendermint Core 共识 P2P 网络层 RPC 区块链接口 交易缓存，队列   1. 算法 - 阶">
+  <meta name="description" content="位运算 运算替换 不用加减 完成 加减法 不用乘除 完成 乘除法 减法替代，a 不停 - b, 并计数 优化 A &#x2F; X &gt; b 则 A &gt; x * b, 利用此特性将X从最大可能值向最小值循环尝试 a * x &gt; b &#x3D;&gt; a &#x3D; a - x * b, v &#x3D; v+x      找唯一的数字 在重复的数字 找出重复3   2进制统计 统计 1 的个数 n &amp; 1&amp;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="#BlockChain Tendermint共识">
-<meta property="og:url" content="http://example.com/2021/09/01/BlockChain-Tendermint%E5%85%B1%E8%AF%86/index.html">
+<meta property="og:title" content="Algorithm-位运算总结">
+<meta property="og:url" content="http://example.com/2021/09/27/Algorithm-%E4%BD%8D%E8%BF%90%E7%AE%97%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Tendermint一种拜占庭共识算法 不同环境 安全 一致性 复用 Core + ABCI， 是对共识层以下的一层封装   1. 核心模块ABCI app socket 链接 实现ABCI 接口 checkTX DeliverTX Commit   能处理 ABCI message  Tendermint Core 共识 P2P 网络层 RPC 区块链接口 交易缓存，队列   1. 算法 - 阶">
+<meta property="og:description" content="位运算 运算替换 不用加减 完成 加减法 不用乘除 完成 乘除法 减法替代，a 不停 - b, 并计数 优化 A &#x2F; X &gt; b 则 A &gt; x * b, 利用此特性将X从最大可能值向最小值循环尝试 a * x &gt; b &#x3D;&gt; a &#x3D; a - x * b, v &#x3D; v+x      找唯一的数字 在重复的数字 找出重复3   2进制统计 统计 1 的个数 n &amp; 1&amp;">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://pic3.zhimg.com/80/v2-ce91a17d2eaf8c6a472c404663006b7e_1440w.jpg">
-<meta property="og:image" content="https://pic1.zhimg.com/80/v2-ebcaa425624856f3b88109e24baf5a20_1440w.jpg">
-<meta property="article:published_time" content="2021-09-01T06:29:56.000Z">
-<meta property="article:modified_time" content="2021-09-02T03:36:42.124Z">
+<meta property="article:published_time" content="2021-09-27T08:48:45.000Z">
+<meta property="article:modified_time" content="2021-10-26T07:52:19.396Z">
 <meta property="article:author" content="Marvin Zhang">
-<meta property="article:tag" content="BlockChain">
+<meta property="article:tag" content="Algorithm">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://pic3.zhimg.com/80/v2-ce91a17d2eaf8c6a472c404663006b7e_1440w.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -158,125 +155,52 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-BlockChain-Tendermint共识" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Algorithm-位运算总结" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      #BlockChain Tendermint共识
+      Algorithm-位运算总结
     </h1>
   
 
         
-        <a href="/2021/09/01/BlockChain-Tendermint%E5%85%B1%E8%AF%86/" class="archive-article-date">
-  	<time datetime="2021-09-01T06:29:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-01</time>
+        <a href="/2021/09/27/Algorithm-%E4%BD%8D%E8%BF%90%E7%AE%97%E6%80%BB%E7%BB%93/" class="archive-article-date">
+  	<time datetime="2021-09-27T08:48:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-09-27</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Tendermint"><a href="#Tendermint" class="headerlink" title="Tendermint"></a>Tendermint</h1><p>一种拜占庭共识算法</p>
-<p>不同环境 安全 一致性 复用</p>
-<p>Core + ABCI， 是对共识层以下的一层封装</p>
-<p><img src="https://pic3.zhimg.com/80/v2-ce91a17d2eaf8c6a472c404663006b7e_1440w.jpg" alt="note image"></p>
-<hr>
-<h2 id="1-核心模块"><a href="#1-核心模块" class="headerlink" title="1. 核心模块"></a>1. 核心模块</h2><h3 id="ABCI-app"><a href="#ABCI-app" class="headerlink" title="ABCI app"></a>ABCI app</h3><ul>
-<li>socket 链接</li>
-<li>实现ABCI 接口<ul>
-<li>checkTX</li>
-<li>DeliverTX</li>
-<li>Commit</li>
+        <h2 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h2><ol>
+<li>运算替换<ul>
+<li>不用加减 完成 加减法</li>
+<li>不用乘除 完成 乘除法<ul>
+<li>减法替代，a 不停 - b, 并计数</li>
+<li>优化 A / X &gt; b 则 A &gt; x * b, 利用此特性将X从最大可能值向最小值循环尝试</li>
+<li>a * x &gt; b =&gt; a = a - x * b, v = v+x</li>
 </ul>
 </li>
-<li>能处理 ABCI message</li>
+<li></li>
 </ul>
-<h3 id="Tendermint-Core"><a href="#Tendermint-Core" class="headerlink" title="Tendermint Core"></a>Tendermint Core</h3><ul>
-<li>共识</li>
-<li>P2P 网络层</li>
-<li>RPC 区块链接口</li>
-<li>交易缓存，队列</li>
+</li>
+<li>找唯一的数字<ul>
+<li>在重复的数字</li>
+<li>找出重复3</li>
 </ul>
-<hr>
-<h2 id="1-算法-阶段"><a href="#1-算法-阶段" class="headerlink" title="1. 算法 - 阶段"></a>1. 算法 - 阶段</h2><p><img src="https://pic1.zhimg.com/80/v2-ebcaa425624856f3b88109e24baf5a20_1440w.jpg" alt="note image"></p>
-<p>NewHeight</p>
-<ul>
-<li>进入到下一轮 共识</li>
-<li>round robin 选择 proposer （voting power）</li>
-</ul>
-<p><strong>Propose</strong></p>
-<ul>
-<li>判定 有没有lock 的 block<ul>
-<li>没有 -&gt; gossip 广播proposal</li>
-<li>有 -&gt; 直接propose locked block + proof of block</li>
+</li>
+<li>2进制统计<ul>
+<li>统计 1 的个数<ul>
+<li>n &amp; 1&lt;&lt; i 按照位数，逐位查看</li>
+<li>【 n &amp; (n-1) 】运算会将n的最后一位1变成0</li>
 </ul>
 </li>
 </ul>
-<p><strong>preVote</strong></p>
-<ul>
-<li><p>LOCK 判定</p>
-<ul>
-<li>有 就对lock的block投票</li>
-<li>没有 就对当前轮</li>
-</ul>
-</li>
-<li><p>同时收集 prevote 的投票 打包 进入 PoLC</p>
-</li>
-<li><p>如果自己有 Lock-Block，这时又收到一个新的针对另外一个块的 PoLC，并且满足LastLockRound &lt; PoLC-Round &lt; 当前 Round，则解锁 Lock-Block。 </p>
-</li>
-<li><p>如果 timeout 期间没收到 proposal，或者收到的 proposal 是无效的，那么就投 nil 票。<br>在 Prevote 阶段不会锁住任何 block。</p>
-</li>
-</ul>
-<p><strong>preCommit</strong></p>
-<ul>
-<li><p>Prevote 超时或者收到的 Prevote 的 nil 票超过 2/3 时 进入此阶段</p>
-</li>
-<li><p>如果此时收到了 +2/3 的 prevote 投票，就广播一条 precommit 投票，同时，把自己锁在当前的 block 上（把之前的都释放掉）。 LastLockRound 置为当前 Round</p>
-</li>
-<li><p>如果收到 +2/3 的 nil 投票，那么就释放锁。投 precommit</p>
-</li>
-<li><p>收到 +2/3 投票进入 commit， 否则 下一轮 propose</p>
-</li>
-</ul>
-<p>Commit</p>
-<ul>
-<li>节点必须收到该 block</li>
-<li>节点必须等待，直到收到 2/3 的 节点 commit 信息。</li>
-</ul>
-<hr>
-<h2 id="Feature"><a href="#Feature" class="headerlink" title="Feature"></a>Feature</h2><ul>
-<li>propose + preVote + preCommit 称为Round</li>
-<li>commit 前可能会经过多个round</li>
-<li>PoLC - proof of lock change - 表示特定 块+高度+轮数 上 prevote 投票集合</li>
-<li>锁定机制：一旦验证人预投票了一个区块，那么该验证人就会被锁定在这个区块。然后：<ol>
-<li>该验证人必须在预提交的区块进行预投票。</li>
-<li>当前一轮预提议和预投票没成功提交区块时，该验证人就会被解锁，然后进行对新块的下一轮预提交。</li>
-</ol>
-</li>
-</ul>
-<hr>
-<h2 id="优势-bft-raft"><a href="#优势-bft-raft" class="headerlink" title="优势 bft-raft"></a>优势 bft-raft</h2><ol>
-<li>同一个高度不会有多个快，不会分叉</li>
-</ol>
-<h2 id="与PBFT"><a href="#与PBFT" class="headerlink" title="与PBFT"></a>与PBFT</h2><ol>
-<li><p>相同点：<br>1）同属BFT体系。<br>2）抗1/3拜占庭节点攻击。<br>3）三阶段提交，第一阶段广播交易（区块），后两阶段广播签名（确认）。<br>4）两者都需要达到法定人数才能提交块。</p>
-</li>
-<li><p>不同点：</p>
-<ol>
-<li>Tendermint与PBFT的区别主要是在超过1/3节点为拜占庭节点的情况下。</li>
-</ol>
-<p> 当拜占庭节点数量在验证者数量的1/3和2/3之间时，PBFT算法无法提供保证，使得攻击者可以将任意结果返回给客户端。而Tendermint共识模型认为必须超过2/3数量的precommit确认才能提交块。举个例子，如果1/2的验证者是拜占庭节点，Tendermint中这些拜占庭节点能够阻止区块的提交，但他们自己也无法提交恶意块。而在PBFT中拜占庭节点却是可以提交块给客户端。<br> 简单的说，就是比特币的网络存在分叉的可能，而Tendermint不会发生这种情况。</p>
-<ol start="2">
-<li><p>另一个不同点在于拜占庭节点概念不同，PBFT指的是节点数，而Tendermint代表的是节点的权益数，也就是投票权力。</p>
-</li>
-<li><p>最后一点，PBFT需要预设一组固定的验证人，而Tendermint是通过要求超过2/3法定人数的验证人员批准会员变更，从而支持验证人的动态变化。</p>
 </li>
 </ol>
-</li>
-</ol>
-<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1446865">Reference详解</a></p>
 
       
 
@@ -311,7 +235,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">BlockChain</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Algorithm</a>
         		</li>
       		
 		</ul>
@@ -367,7 +291,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/09/01/BlockChain-Tendermint%E5%85%B1%E8%AF%86/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/09/27/Algorithm-%E4%BD%8D%E8%BF%90%E7%AE%97%E6%80%BB%E7%BB%93/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -381,18 +305,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/09/02/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-1/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2021/10/26/grok-TinyUrl/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          计算机网络-1
+          grok-TinyUrl
         
       </div>
     </a>
   
   
-    <a href="/2021/09/01/Spring-Cors%E4%BB%A5%E5%8F%8AFilter%E5%92%8CInterceptor/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">#Spring Cors以及Filter和Interceptor</div>
+    <a href="/2021/09/18/SystemDesign-grok/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">SystemDesign-grok-</div>
       <i class="icon-circle-right"></i>
     </a>
   
