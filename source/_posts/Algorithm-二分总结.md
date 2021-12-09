@@ -1,10 +1,10 @@
 ---
-title: '#Algorithm 二分总结'
+title: '#Algorithm 二分'
 date: 2021-09-01 10:18:16
 tags:
     - Algorithm
 ---
-# 二分法
+# 二分法搜索
 
 basic
 ---
